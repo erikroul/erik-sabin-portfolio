@@ -1,67 +1,94 @@
 export interface ProjectItem {
   id: string;
   title: string;
-  category: 'Photoshop' | 'Illustrator' | '3D & CG' | 'Digital Art' | 'Other';
+  category: 'Photoshop' | 'Illustrator' | 'Web Design' | 'Digital Art';
   description: string;
   imageUrl: string;
-  year?: string;
-  tools?: string[];
+  year: string;
+  tools: string[];
+  dimensions?: string;
+  aspect?: 'square' | 'portrait' | 'landscape' | 'wide';
 }
 
-export const initialProjects: ProjectItem[] = [
+export const realProjects: ProjectItem[] = [
   {
-    id: '1',
-    title: 'Neon Cyber Cityscape',
+    id: 'deer-silhouette',
+    title: 'Forest Spirit / Deer Silhouette',
     category: 'Photoshop',
-    description: 'Матт-пейнтинг и фотоманипуляция в темной футуристической стилистике.',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
-    year: '2024',
-    tools: ['Adobe Photoshop', 'Wacom tablet']
+    description: 'Double exposure & photo-manipulation blending wildlife silhouette with an atmospheric misty pine forest texture.',
+    imageUrl: './works/deer-silhouette.jpg',
+    year: '2022',
+    tools: ['Adobe Photoshop', 'Double Exposure', 'Color Grading'],
+    aspect: 'portrait'
   },
   {
-    id: '2',
-    title: 'Minimal Geometric Branding',
+    id: 'owl-vector',
+    title: 'Geometric Totem Owl',
     category: 'Illustrator',
-    description: 'Векторная графика, логотипы и айдентика бренда с чистой композицией.',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    description: 'Intricate symmetrical line-art and ornamental vector illustration with sacred geometry details.',
+    imageUrl: './works/owl-vector.png',
+    year: '2023',
+    tools: ['Adobe Illustrator', 'Vector Line Art', 'Geometric Symmetry'],
+    aspect: 'portrait'
+  },
+  {
+    id: 'powerbank-web',
+    title: 'Designer Powerbank — UI/UX & Product Concept',
+    category: 'Web Design',
+    description: 'Minimalist high-tech e-commerce showcase concept for designer charging accessories with dark tactile aesthetics.',
+    imageUrl: './works/powerbank-web.png',
     year: '2024',
-    tools: ['Adobe Illustrator']
+    tools: ['Web & UI Design', 'Photoshop', 'Product Visuals'],
+    aspect: 'wide'
   },
   {
-    id: '3',
-    title: 'Sci-Fi Abstract Shapes',
-    category: 'Digital Art',
-    description: 'Эксперименты с формами, градиентами и композиционным светом.',
-    imageUrl: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
-    year: '2023',
-    tools: ['Photoshop', 'Illustrator']
-  },
-  {
-    id: '4',
-    title: 'Fantasy Character Concept',
-    category: 'Digital Art',
-    description: 'Концепт-арт персонажа с проработкой деталей костюма и текстур.',
-    imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80',
-    year: '2023',
-    tools: ['Adobe Photoshop']
-  },
-  {
-    id: '5',
-    title: 'Vector Character & Sticker Pack',
+    id: 'mori-branding',
+    title: 'MORI — Pastel Cosmetics & Packaging Identity',
     category: 'Illustrator',
-    description: 'Серия ярких стилизованных иллюстраций и векторных стикеров.',
-    imageUrl: 'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80',
-    year: '2024',
-    tools: ['Adobe Illustrator']
+    description: 'Delicate organic botanical branding identity, package design mockup, and pastel color palette formulation.',
+    imageUrl: './works/mori-branding.png',
+    year: '2023',
+    tools: ['Adobe Illustrator', 'Branding Identity', 'Packaging'],
+    aspect: 'landscape'
   },
   {
-    id: '6',
-    title: 'Night Moody Portrait Retouch',
+    id: 'magic-book-art',
+    title: 'Grimoire of Whispers — Fantasy Asset',
+    category: 'Digital Art',
+    description: 'Stylized 2D game asset illustration of an enchanted arcane book with horned skull relic and glowing crystals.',
+    imageUrl: './works/magic-book-art.png',
+    year: '2023',
+    tools: ['Adobe Photoshop', 'Digital Painting', 'Concept Art'],
+    aspect: 'square'
+  },
+  {
+    id: 'artwork-banner',
+    title: 'Creative Studio Process & Typography',
     category: 'Photoshop',
-    description: 'Художественная цветокоррекция, ретушь кожи и работа с мягким контровым светом.',
-    imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80',
+    description: 'Mixed media composition highlighting traditional sketchbooks, drafting pencils, and modern editorial serif typography.',
+    imageUrl: './works/artwork-banner.png',
+    year: '2022',
+    tools: ['Photoshop', 'Typography', 'Mixed Media'],
+    aspect: 'landscape'
+  },
+  {
+    id: 'castle-illustration',
+    title: 'Fairytale Citadel Spire',
+    category: 'Digital Art',
+    description: 'Atmospheric fantasy landscape featuring medieval red-roofed watchtowers and watercolor-inspired textures.',
+    imageUrl: './works/castle-illustration.jpg',
+    year: '2022',
+    tools: ['Digital Painting', 'Color Concept', 'Photoshop'],
+    aspect: 'portrait'
+  },
+  {
+    id: 'additional-work',
+    title: 'Explorative Graphic Studies',
+    category: 'Illustrator',
+    description: 'Graphic experiments combining vector motifs, branding layouts, and decorative patterns.',
+    imageUrl: './works/additional-work.png',
     year: '2023',
-    tools: ['Adobe Photoshop', 'Lightroom']
+    tools: ['Adobe Illustrator', 'Layout Design'],
+    aspect: 'square'
   }
 ];
-
