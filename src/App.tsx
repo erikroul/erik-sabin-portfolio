@@ -20,7 +20,7 @@ export default function App() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [layoutMode, setLayoutMode] = useState<'editorial' | 'masonry'>('editorial');
 
-  const categories = ['ALL', 'Photoshop', 'Illustrator', 'Web Design', 'Digital Art'];
+  const categories = ['ALL', 'Photoshop', 'Illustrator', 'Web & UI', 'Digital Art'];
 
   const filteredProjects = activeCategory === 'ALL'
     ? realProjects
