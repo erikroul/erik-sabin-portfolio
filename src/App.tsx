@@ -74,7 +74,7 @@ function About({ onOpen }: { onOpen: (sources: string[], index: number) => void 
         <div>
           <p className="kicker">About</p>
           <h1>Erik Sabin</h1>
-          <p className="lede">I'm Eric Sabin, I am 30 years old. Originally from Estonia.</p>
+          <p className="lede">I'm Erik Sabin, I am 30 years old. Originally from Estonia.</p>
           <p>I graduated from Eesti Ettevõtluskõrgkool Mainor.</p>
           <p>I'm study web design.</p>
         </div>
@@ -340,9 +340,56 @@ export default function App() {
     }
   }, [active])
 
-  const covers = workPages.flatMap((item) => {
-    const src = works[item.id]?.[0]
-    return src ? [{ ...item, src }] : []
+  const lead = [
+    'ps-elk.jpg',
+    'ai-owl.png',
+    'web-powerbank.png',
+    'web-mori.png',
+    'art-banner.png',
+    'art-grimoire.png',
+    'art-citadel.jpg',
+  ]
+  const widePieces = new Set([
+    'web-powerbank.png',
+    'web-mori.png',
+    'web-dashboard.png',
+    'art-banner.png',
+    'art-grimoire.png',
+    'art-citadel.jpg',
+    'ps-city.jpg',
+    'ps-whale.jpg',
+    'ps-forest.jpg',
+  ])
+  const tallPieces = new Set(['ps-elk.jpg', 'ai-owl.png', 'ai-lion.png', 'ai-stag.png', 'ai-skull.png'])
+  const seen = new Set<string>()
+  const pieceOrder = [
+    'photoshop',
+    'illustrator',
+    'web',
+    'traditional-artwork',
+    'figma',
+    'work-process',
+    'project',
+    'orders',
+  ]
+  const pieces = pieceOrder.flatMap((id) => {
+    const item = workPages.find((page) => page.id === id)
+    if (!item) return []
+    return (works[item.id] ?? []).flatMap((src) => {
+      const name = decodeURIComponent(src.split('/').pop() ?? src)
+      if (seen.has(name)) return []
+      seen.add(name)
+      const shape = widePieces.has(name) ? 'is-wide' : tallPieces.has(name) ? 'is-tall' : ''
+      return [{ ...item, src, name, shape }]
+    })
+  })
+  pieces.sort((a, b) => {
+    const aIndex = lead.indexOf(a.name)
+    const bIndex = lead.indexOf(b.name)
+    if (aIndex === -1 && bIndex === -1) return 0
+    if (aIndex === -1) return 1
+    if (bIndex === -1) return -1
+    return aIndex - bIndex
   })
 
   return (
@@ -414,7 +461,7 @@ export default function App() {
             <section className="intro" ref={introRef}>
               <img className="hero-art" src="./hero-crocodile.jpg" alt="" />
               <div className="wrap intro-copy">
-                <p>I'm Eric Sabin, I am 30 years old. Originally from Estonia.</p>
+                <p>I'm Erik Sabin, I am 30 years old. Originally from Estonia.</p>
                 <p>I graduated from Eesti Ettevõtluskõrgkool Mainor.</p>
                 <p>I'm study web design.</p>
               </div>
@@ -423,13 +470,15 @@ export default function App() {
             <section className="catalogue">
               <div className="wrap">
                 <h2>Works</h2>
-                <div className="covers">
-                  {covers.map((item) => (
-                    <a key={item.id} className="cover" href={`#/${item.id}`}>
-                      <span className="cover-frame">
-                        <img src={item.src} alt="" />
-                      </span>
-                      <span className="cover-label">{item.label}</span>
+                <div className="collage">
+                  {pieces.map((item) => (
+                    <a
+                      key={item.src}
+                      className={item.shape ? `piece ${item.shape}` : 'piece'}
+                      href={`#/${item.id}`}
+                    >
+                      <img src={item.src} alt="" />
+                      <span className="piece-label">{item.label}</span>
                     </a>
                   ))}
                 </div>
